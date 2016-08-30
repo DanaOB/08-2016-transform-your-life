@@ -32,6 +32,7 @@ console.log(allNumbersMultipliedByThree)//[3,6,9,12,15]
 var bestSentence = "This is the best six week course ever!";
 
 var	bestSentenceToUpperCase = transform(bestSentence,function(letter){
+	console.log("this is" + bestSentence)
 	return letter.toUpperCase()
 })
 
