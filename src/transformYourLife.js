@@ -28,15 +28,18 @@ var allNumbersMultipliedByThree = transform(numbers,function(number){
 	return number * 3
 })
 console.log(allNumbersMultipliedByThree)//[3,6,9,12,15]
+
+
 // 3. bestSentenceToUpperCase
 var bestSentence = "This is the best six week course ever!";
+var bestSentenceSplitted = bestSentence.split(" ")
 
-var	bestSentenceToUpperCase = transform(bestSentence,function(letter){
-	console.log("this is" + bestSentence)
+var	bestSentenceToUpperCase = transform(bestSentenceSplitted,function(letter){
+
 	return letter.toUpperCase()
 })
 
-console.log(bestSentenceToUpperCase) //"THIS IS THE BEST SIX WEEK COURSE EVER!"
+console.log(bestSentenceToUpperCase.join(" "))//"THIS IS THE BEST SIX WEEK COURSE EVER!"
 
 // 4. collectedContents
 var person = {name: 'Jon', greatestFear: 'fearItself'};
