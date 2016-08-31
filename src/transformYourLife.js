@@ -47,9 +47,11 @@ console.log(bestSentenceToUpperCase.join(" "))//"THIS IS THE BEST SIX WEEK COURS
 var person = {name: 'Jon', greatestFear: 'fearItself'};
 
 var collectedContents = transform(person, function(value, key){
-  var newArray = []
-  newArray.push(key, value)
-	return newArray
+  // var newArray = []
+  // newArray.push(key, value)
+	// return newArray
+
+  return [key, value];
 })
 
 
@@ -100,55 +102,98 @@ var upperCase = function(collection){
 var contentsCollection = function(collection){
 
   return transform(person, function(value,key){
-    return value
+    return [key, value]
   })
 }
 
 
 var person = {name: 'Jon', greatestFear: 'fearItself'};
 var collectedContents = contentsCollection(person);
-console.log(collectedContents); // ['name', 'Jon', 'greatestFear', 'fear itself'];
-
-
-
-var transform = function(collection,callback){
-
-  var results = []
-  loop(collection,function(element1, element2){
-    results.push(callback(element1, element2))
-  })
-
-  return results
-}
-
-
-var loop = function(collection, callback){
-
-  if (Array.isArray(collection)){
-    for (var i = 0; i < collection.length; i++){
-      callback(collection[i], i);
-    }
-  } else if (typeof collection === 'object'){
-    for (var key in collection){
-      callback(collection[key], key);
-    }
-  }
-};
-
-
-
-
-
-
+console.log(collectedContents); // [['name', 'Jon'], ['greatestFear', 'fear itself']];
 
 
 // 8. multByWhatever
 
+
+var multByWhatever = function(collection, inputNum){
+  return transform(collection, function(number){
+    return number * inputNum;
+  });
+}
+
+var multByWhateverTest = multByWhatever(numbers, 2);
+console.log(multByWhateverTest); // [2, 4, 6, 8, 10];
+
+var multByWhateverTest2 = multByWhatever(numbers, 5)
+console.log(multByWhateverTest2)// [5, 10, 15, 20, 25];
+
+var numbersMultipliedByPi = multByWhatever(numbers, Math.PI)
+
+console.log(numbersMultipliedByPi)
+
 // 9. divideByWhatever
+var divideByWhatever = function (collection, inputNum){
+  return transform(collection, function(number){
+    return number / inputNum
+  })
+}
+
+var divByWhateverTest = divideByWhatever(numbers,2)
+console.log(divByWhateverTest)
 
 // 10. switchCase
+var switchCase = function (sentence, inputCase){
+  var sentenceSplitted = sentence.split()
+
+  if (inputCase === 'upper'){
+    return transform(sentenceSplitted,function(word){
+      return word.toUpperCase()
+    })
+
+  } else if (inputCase === 'lower'){
+    return transform(sentenceSplitted,function(word){
+      return word.toLowerCase()
+    })
+  }
+  
+}
+
+var bestSentence = "This is the best six week course ever!";
+var bestSentenceUpper = switchCase(bestSentence, 'upper');
+console.log(bestSentenceUpper) // "THIS IS THE BEST 6 WEEK COURSE EVER!";
+
+var bestSentence2 = "THIS IS THE BEST 6 WEEK COURSE EVER!"
+var bestSentence2Lower = switchCase(bestSentence2, 'lower');
+console.log(bestSentence2Lower) // "this is the best 6 week course ever!";
+
 
 // 11. contentsCollector
+
+var contentsCollector = function(object, specifier){
+  if (specifier === 'keys'){
+    return transform(object, function(value, key){
+      return key;
+    })
+  }else if (specifier === 'values'){
+    return transform(object, function(value, key){
+      return value;
+    })
+  }else{
+    return transform(object, function(value,key){
+      return [key, value];
+    })
+  }
+}
+
+var person = {name: 'Jon', greatestFear: 'fearItself'};
+var allKeysInPerson = contentsCollector(person, 'keys');
+console.log(allKeysInPerson) // ['name', 'greatestFear'];
+
+var allValuesInPerson = contentsCollector(person, 'values');
+console.log(allValuesInPerson)  // ['Jon', 'fearItself'];
+
+var keysAndValuesInPerson = contentsCollector(person);
+console.log(keysAndValuesInPerson) // [['name', 'Jon'], ['greatestFear', 'fearItself']];
 
 // 13. makeArray
 
